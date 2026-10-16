@@ -1,0 +1,146 @@
+﻿=== notice-board (production) ===
+apiVersion: v1
+items:
+- addressType: IPv4
+  apiVersion: discovery.k8s.io/v1
+  endpoints:
+  - addresses:
+    - 10.244.1.9
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: cte412-02230151-worker2
+    targetRef:
+      kind: Pod
+      name: notice-board-blue-f968c6948-qdhjh
+      namespace: nb-02230151
+      uid: e71de34a-a2f5-44d5-b709-5cc8f538f2ff
+  - addresses:
+    - 10.244.2.9
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: cte412-02230151-worker
+    targetRef:
+      kind: Pod
+      name: notice-board-blue-f968c6948-psh9g
+      namespace: nb-02230151
+      uid: ca0cd2e1-6f8d-470f-8465-fac6879c8bf5
+  - addresses:
+    - 10.244.1.10
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: cte412-02230151-worker2
+    targetRef:
+      kind: Pod
+      name: notice-board-blue-f968c6948-8mcvm
+      namespace: nb-02230151
+      uid: de6d1c4e-fc94-4d3e-869d-6736f1e7c511
+  kind: EndpointSlice
+  metadata:
+    creationTimestamp: "2026-10-16T18:22:07Z"
+    generateName: notice-board-
+    generation: 51
+    labels:
+      endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+      kubernetes.io/service-name: notice-board
+    name: notice-board-k2c4x
+    namespace: nb-02230151
+    ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Service
+      name: notice-board
+      uid: c9e9af47-286f-4305-911d-6fd1fb952ec3
+    resourceVersion: "31143"
+    uid: 161175e3-e5cd-419a-9dc7-a6a0ca403641
+  ports:
+  - name: ""
+    port: 8080
+    protocol: TCP
+kind: List
+metadata:
+  resourceVersion: ""
+=== notice-board-preview ===
+apiVersion: v1
+items:
+- addressType: IPv4
+  apiVersion: discovery.k8s.io/v1
+  endpoints:
+  - addresses:
+    - 10.244.2.11
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: cte412-02230151-worker
+    targetRef:
+      kind: Pod
+      name: notice-board-green-78d8c4d5ff-7hv9d
+      namespace: nb-02230151
+      uid: 6138c71d-95ee-4c4a-b368-77849e61752e
+  - addresses:
+    - 10.244.2.10
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: cte412-02230151-worker
+    targetRef:
+      kind: Pod
+      name: notice-board-green-78d8c4d5ff-zmhtp
+      namespace: nb-02230151
+      uid: 1cf40d2e-e30c-4448-9395-24189fc7721c
+  - addresses:
+    - 10.244.1.11
+    conditions:
+      ready: true
+      serving: true
+      terminating: false
+    nodeName: cte412-02230151-worker2
+    targetRef:
+      kind: Pod
+      name: notice-board-green-78d8c4d5ff-2wr8d
+      namespace: nb-02230151
+      uid: 6468f954-9316-48e9-9ed4-ecdcc3280f0d
+  kind: EndpointSlice
+  metadata:
+    annotations:
+      endpoints.kubernetes.io/last-change-trigger-time: "2026-10-16T19:20:11Z"
+    creationTimestamp: "2026-10-16T19:19:57Z"
+    generateName: notice-board-preview-
+    generation: 7
+    labels:
+      endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+      kubernetes.io/service-name: notice-board-preview
+    name: notice-board-preview-mbvc2
+    namespace: nb-02230151
+    ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Service
+      name: notice-board-preview
+      uid: 3fe6fce0-f5aa-4d3c-b7a7-2edeaee55782
+    resourceVersion: "31269"
+    uid: ab2c25fb-05fc-4ece-b17d-7b806caa0f06
+  ports:
+  - name: ""
+    port: 8080
+    protocol: TCP
+kind: List
+metadata:
+  resourceVersion: ""
+=== Pod IPs by slot ===
+NAME                                  READY   STATUS    RESTARTS   AGE     IP            NODE                      NOMINATED NODE   READINESS GATES   SLOT
+notice-board-blue-f968c6948-8mcvm     1/1     Running   0          3m55s   10.244.1.10   cte412-02230151-worker2   <none>           <none>            blue
+notice-board-blue-f968c6948-psh9g     1/1     Running   0          3m55s   10.244.2.9    cte412-02230151-worker    <none>           <none>            blue
+notice-board-blue-f968c6948-qdhjh     1/1     Running   0          3m55s   10.244.1.9    cte412-02230151-worker2   <none>           <none>            blue
+notice-board-green-78d8c4d5ff-2wr8d   1/1     Running   0          3m37s   10.244.1.11   cte412-02230151-worker2   <none>           <none>            green
+notice-board-green-78d8c4d5ff-7hv9d   1/1     Running   0          3m37s   10.244.2.11   cte412-02230151-worker    <none>           <none>            green
+notice-board-green-78d8c4d5ff-zmhtp   1/1     Running   0          3m37s   10.244.2.10   cte412-02230151-worker    <none>           <none>            green

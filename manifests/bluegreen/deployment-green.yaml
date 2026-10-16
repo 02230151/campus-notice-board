@@ -1,0 +1,56 @@
+# Purpose: green Deployment of the blue/green pair (version 1.1.0).
+# Apply:   kubectl apply -f manifests/bluegreen/deployment-green.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notice-board-green
+  namespace: nb-02230151                # lab rule: <sid> in namespace
+  labels:
+    app: notice-board
+    slot: green
+  annotations:
+    kubernetes.io/change-cause: "Task 7: green slot runs 1.1.0"
+spec:
+  replicas: 3                           # lab-mandated
+  selector:
+    matchLabels:
+      app: notice-board
+      slot: green                       # slot label keeps the two colours' Pods separate
+  minReadySeconds: 5                    # same as Task 3: Pod must stay ready 5s to count as available
+  progressDeadlineSeconds: 60           # same as Task 3: mark a stuck rollout failed after 60s
+  template:
+    metadata:
+      labels:
+        app: notice-board
+        slot: green                     # the Services select on this label
+        version: "1.1.0"
+    spec:
+      containers:
+        - name: notice-board
+          image: notice-board:02230151-1.1.0
+          imagePullPolicy: Never        # image is loaded into the nodes; never contact a registry
+          ports:
+            - name: http                # named port so Services can use targetPort: http
+              containerPort: 8080
+          securityContext:
+            runAsNonRoot: true          # image runs as UID 10001
+            allowPrivilegeEscalation: false
+          resources:
+            requests:
+              cpu: 100m                 # 6 Pods = 600m of the 1 CPU quota, leaving room for the monitor
+              memory: 64Mi              # 6 x 64Mi = 384Mi of the 1Gi quota
+            limits:
+              cpu: 200m                 # 6 x 200m = 1200m of the 2 CPU limit quota
+              memory: 128Mi             # 6 x 128Mi = 768Mi of the 2Gi limit quota
+          readinessProbe:
+            httpGet:
+              path: /healthz            # only ready Pods receive traffic; honours the 5s warm-up
+              port: http
+            periodSeconds: 2
+            failureThreshold: 2
+          livenessProbe:
+            httpGet:
+              path: /version            # deliberately NOT /healthz: unhealthy Pods leave rotation, not restart-loop
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10

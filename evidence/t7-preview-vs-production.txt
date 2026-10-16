@@ -1,0 +1,22 @@
+﻿=== preview Service (should be 1.1.0) ===
+{"version": "1.1.0", "student": "02230151", "pod": "notice-board-green-78d8c4d5ff-zmhtp"}
+
+{"version": "1.1.0", "student": "02230151", "pod": "notice-board-green-78d8c4d5ff-2wr8d"}
+
+{"version": "1.1.0", "student": "02230151", "pod": "notice-board-green-78d8c4d5ff-2wr8d"}
+
+{"version": "1.1.0", "student": "02230151", "pod": "notice-board-green-78d8c4d5ff-2wr8d"}
+
+{"version": "1.1.0", "student": "02230151", "pod": "notice-board-green-78d8c4d5ff-zmhtp"}
+
+=== production Service (should still be 1.0.0) ===
+{"version": "1.0.0", "student": "02230151", "pod": "notice-board-blue-f968c6948-psh9g"}
+
+{"version": "1.0.0", "student": "02230151", "pod": "notice-board-blue-f968c6948-8mcvm"}
+
+{"version": "1.0.0", "student": "02230151", "pod": "notice-board-blue-f968c6948-8mcvm"}
+
+{"version": "1.0.0", "student": "02230151", "pod": "notice-board-blue-f968c6948-psh9g"}
+
+{"version": "1.0.0", "student": "02230151", "pod": "notice-board-blue-f968c6948-psh9g"}
+
