@@ -1,0 +1,6 @@
+﻿Name:       nb-limits
+Namespace:  nb-02230151
+Type        Resource  Min  Max  Default Request  Default Limit  Max Limit/Request Ratio
+----        --------  ---  ---  ---------------  -------------  -----------------------
+Container   cpu       -    -    100m             250m           -
+Container   memory    -    -    64Mi             128Mi          -

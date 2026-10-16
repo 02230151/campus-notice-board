@@ -1,0 +1,44 @@
+services:
+
+  notice-site:
+    build:
+      context: ./notice-site
+      args:
+        VERSION: "1.0"
+    image: notice-site:1.0
+    ports:
+      - "8081:80"
+    restart: unless-stopped
+
+  counter:
+    build:
+      context: ./counter
+      args:
+        VERSION: "1.0"
+    image: counter:1.0
+    ports:
+      - "5000:5000"
+    environment:
+      BOARD_NAME: "Campus Notice Board"
+      REDIS_HOST: "redis"
+      APP_VERSION: "1.0"
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+    expose:
+      - "6379"
+
+volumes:
+  redis-data:

@@ -1,0 +1,17 @@
+
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  # Identifies this practical's isolated Kubernetes environment.
+  name: nb-02230151
+
+  labels:
+    # Groups resources belonging to the Campus Notice Board.
+    app.kubernetes.io/part-of: campus-notice-board
+    # Identifies the practical namespace.
+    cte412/practical: "06"
+
+  annotations:
+    # Records the student's full name as required by the assessment.
+    cte412/student-name: "Tashi D Rinzin"

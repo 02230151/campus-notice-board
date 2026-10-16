@@ -1,0 +1,24 @@
+
+# Purpose: Enforce the resource quota for the CTE412 namespace.
+# Apply command:
+# kubectl --context kind-cte412-02230151 apply -f manifests/base/resource-quota.yaml
+
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: nb-quota
+  namespace: nb-02230151
+spec:
+  hard:
+    # Limit the total CPU requested by Pods.
+    requests.cpu: "1"
+    # Limit the total requested memory to 1 GiB.
+    requests.memory: 1Gi
+    # Limit the total CPU that containers may use.
+    limits.cpu: "2"
+    # Limit the total memory that containers may use.
+    limits.memory: 2Gi
+    # Allow no more than 15 Pods in this namespace.
+    pods: "15"
+    # Allow no more than four Services.
+    count/services: "4"

@@ -1,0 +1,21 @@
+
+# Purpose: Set default container resource requests and limits.
+# Apply command:
+# kubectl --context kind-cte412-02230151 apply -f manifests/base/limit-range.yaml
+
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: nb-limits
+  namespace: nb-02230151
+spec:
+  limits:
+    - type: Container
+      # Default CPU request reserves a small share of the 1 CPU quota.
+      defaultRequest:
+        cpu: 100m
+        memory: 64Mi
+      # Default CPU and memory limits keep each container bounded.
+      default:
+        cpu: 250m
+        memory: 128Mi

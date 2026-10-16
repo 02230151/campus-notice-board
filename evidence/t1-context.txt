@@ -1,0 +1,2 @@
+﻿context: kind-cte412-02230151
+namespace: nb-02230151
