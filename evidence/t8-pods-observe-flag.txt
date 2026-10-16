@@ -1,0 +1,10 @@
+﻿=== ConfigMap value now ===
+true
+
+=== FEATURE_PINNED seen inside each RUNNING green Pod ===
+pod/notice-board-green-777fbb588b-hh2ms -> false
+pod/notice-board-green-777fbb588b-hzlt8 -> false
+pod/notice-board-green-777fbb588b-thnkn -> false
+
+=== production /notices still (flag not observed) ===
+{"pinnedFirst": false, "notices": [{"id": 1, "title": "Library hours extended", "body": "Open until 10pm during exams.", "category": "academic", "pinned": false}, {"id": 2, "title": "Hostel fee deadline", "body": "Pay before the 30th.", "category": "finance", "pinned": true}, {"id": 3, "title": "Guest lecture on DevOps", "body": "Friday 2pm, Hall B.", "category": "events", "pinned": false}]}

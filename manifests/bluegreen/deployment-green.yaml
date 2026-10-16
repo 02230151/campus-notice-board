@@ -20,6 +20,8 @@ spec:
   progressDeadlineSeconds: 60           # same as Task 3: mark a stuck rollout failed after 60s
   template:
     metadata:
+      annotations:
+        cte412/flags-revision: "2"   # changing this forces a rolling restart so Pods re-read the flag
       labels:
         app: notice-board
         slot: green                     # the Services select on this label
@@ -29,6 +31,12 @@ spec:
         - name: notice-board
           image: notice-board:02230151-1.1.0
           imagePullPolicy: Never        # image is loaded into the nodes; never contact a registry
+          env:
+            - name: FEATURE_PINNED          # flag is read once, at process start-up
+              valueFrom:
+                configMapKeyRef:
+                  name: notice-board-flags    # ConfigMap holding the flag
+                  key: FEATURE_PINNED
           ports:
             - name: http                # named port so Services can use targetPort: http
               containerPort: 8080

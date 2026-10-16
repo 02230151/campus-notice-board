@@ -1,0 +1,2 @@
+﻿=== production /notices AFTER flag took effect (FEATURE_PINNED=true) ===
+{"pinnedFirst": true, "notices": [{"id": 2, "title": "Hostel fee deadline", "body": "Pay before the 30th.", "category": "finance", "pinned": true}, {"id": 1, "title": "Library hours extended", "body": "Open until 10pm during exams.", "category": "academic", "pinned": false}, {"id": 3, "title": "Guest lecture on DevOps", "body": "Friday 2pm, Hall B.", "category": "events", "pinned": false}]}

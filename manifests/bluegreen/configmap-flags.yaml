@@ -1,0 +1,9 @@
+# Purpose: feature flags for the green Deployment.
+# Apply:   kubectl apply -f manifests/bluegreen/configmap-flags.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: notice-board-flags
+  namespace: nb-02230151
+data:
+  FEATURE_PINNED: "true"              # string, not boolean; the app compares it to "true"

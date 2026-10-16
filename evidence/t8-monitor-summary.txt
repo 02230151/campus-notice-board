@@ -1,0 +1,6 @@
+﻿Total requests:  340
+Failed requests: 0
+First timestamp: 2026-10-16T19:26:08Z
+Last timestamp:  2026-10-16T19:29:32Z
+Responses per version:
+  1.1.0: 340
