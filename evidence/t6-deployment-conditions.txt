@@ -1,0 +1,22 @@
+﻿
+
+type    : Available
+status  : True
+reason  : MinimumReplicasAvailable
+message : Deployment has minimum availability.
+
+type    : Progressing
+status  : False
+reason  : ProgressDeadlineExceeded
+message : ReplicaSet "notice-board-76f5d7766" has timed out progressing.
+
+
+
+kubectl : error: deployment "notice-board" exceeded its progress deadline
+At line:1 char:1
++ kubectl rollout status deployment/notice-board --timeout=5s 2>&1 | Ou ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (error: deployme...ogress dead 
+   line:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
