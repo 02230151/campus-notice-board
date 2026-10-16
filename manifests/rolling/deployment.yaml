@@ -7,23 +7,22 @@ metadata:
   namespace: nb-02230151                # lab rule: <sid> in namespace
   labels:
     app: notice-board
+  annotations:
+    kubernetes.io/change-cause: "Baseline 1.0.0 (strategy set to Recreate)"   # recorded in rollout history for this revision
 spec:
   replicas: 3                           # lab-mandated
   selector:
     matchLabels:
       app: notice-board
   strategy:
-    type: RollingUpdate                 # starting strategy; changed to Recreate in Task 5
-    rollingUpdate:
-      maxUnavailable: 0                 # never remove a serving Pod before a new one is ready
-      maxSurge: 1                       # allow one extra Pod during the rollout
+    type: Recreate                      # Task 5: stop all old Pods first, then start new ones (causes downtime)
   minReadySeconds: 5                    # a new Pod must stay ready 5s before it counts as available
   progressDeadlineSeconds: 60           # rollout with no progress for 60s is marked failed (Task 6)
   template:
     metadata:
       labels:
         app: notice-board
-        version: "1.0.0"                # label value is a string; matches the image version
+        version: "1.0.0"             # label value is a string; matches the image version
     spec:
       containers:
         - name: notice-board
