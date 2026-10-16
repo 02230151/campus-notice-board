@@ -1,0 +1,31 @@
+﻿=== Under 5 seconds after start ===
+HTTP/1.0 200 OK
+Server: BaseHTTP/0.6 Python/3.12.15
+Date: Fri, 16 Oct 2026 18:20:19 GMT
+Content-Type: application/json
+Content-Length: 66
+
+{"version": "1.0.0", "student": "02230151", "pod": "fa370e2e5e80"}
+HTTP/1.0 503 Service Unavailable
+Server: BaseHTTP/0.6 Python/3.12.15
+Date: Fri, 16 Oct 2026 18:20:19 GMT
+Content-Type: application/json
+Content-Length: 23
+
+{"status": "unhealthy"}
+
+=== Over 5 seconds after start ===
+HTTP/1.0 200 OK
+Server: BaseHTTP/0.6 Python/3.12.15
+Date: Fri, 16 Oct 2026 18:20:26 GMT
+Content-Type: application/json
+Content-Length: 66
+
+{"version": "1.0.0", "student": "02230151", "pod": "fa370e2e5e80"}
+HTTP/1.0 200 OK
+Server: BaseHTTP/0.6 Python/3.12.15
+Date: Fri, 16 Oct 2026 18:20:26 GMT
+Content-Type: application/json
+Content-Length: 16
+
+{"status": "ok"}
