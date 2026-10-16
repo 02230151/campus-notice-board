@@ -1,0 +1,36 @@
+# Purpose: availability monitor - requests /version every 0.5s and logs one line per request.
+# Apply:   kubectl apply -f manifests/base/monitor.yaml
+# Never delete or restart this Pod during the practical: the log must be continuous.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: monitor
+  namespace: nb-02230151
+  labels:
+    app: monitor                        # different from app=notice-board so Services never select it
+spec:
+  restartPolicy: Always                 # if the container ever dies, kubelet restarts it
+  containers:
+    - name: monitor
+      image: busybox:1.36               # busybox satisfies the Alpine/busybox-only rule
+      imagePullPolicy: IfNotPresent     # image was loaded into the nodes with kind load
+      command:
+        - /bin/sh
+        - -c
+        - |
+          while true; do
+            TS=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+            if OUT=$(wget -q -T 2 -O - http://notice-board/version 2>&1); then
+              echo "$TS OK $OUT"
+            else
+              echo "$TS FAIL ${OUT:-request failed}"
+            fi
+            sleep 0.5
+          done
+      resources:
+        requests:
+          cpu: 20m                      # tiny loop; keeps quota headroom for 6 app Pods
+          memory: 16Mi
+        limits:
+          cpu: 50m
+          memory: 32Mi
