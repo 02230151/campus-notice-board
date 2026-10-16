@@ -8,25 +8,28 @@ metadata:
   labels:
     app: notice-board
   annotations:
-    kubernetes.io/change-cause: "Task 5: Recreate release of 1.1.0"   # recorded in rollout history for this revision
+    kubernetes.io/change-cause: "Task 5: return to 1.0.0 before RollingUpdate test"   # recorded in rollout history for this revision
 spec:
   replicas: 3                           # lab-mandated
   selector:
     matchLabels:
       app: notice-board
   strategy:
-    type: Recreate                      # Task 5: stop all old Pods first, then start new ones (causes downtime)
+    type: RollingUpdate                 # zero-downtime strategy
+    rollingUpdate:
+      maxUnavailable: 0                 # never remove a serving Pod before its replacement is ready
+      maxSurge: 1                       # allow one extra Pod during the rollout
   minReadySeconds: 5                    # a new Pod must stay ready 5s before it counts as available
   progressDeadlineSeconds: 60           # rollout with no progress for 60s is marked failed (Task 6)
   template:
     metadata:
       labels:
         app: notice-board
-        version: "1.1.0"             # label value is a string; matches the image version
+        version: "1.0.0"             # label value is a string; matches the image version
     spec:
       containers:
         - name: notice-board
-          image: notice-board:02230151-1.1.0
+          image: notice-board:02230151-1.0.0
           imagePullPolicy: Never        # image is loaded into the nodes; kubelet must never contact a registry
           ports:
             - name: http                # named port so Services can use targetPort: http
