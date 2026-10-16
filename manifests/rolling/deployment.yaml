@@ -8,7 +8,7 @@ metadata:
   labels:
     app: notice-board
   annotations:
-    kubernetes.io/change-cause: "Baseline 1.0.0 (strategy set to Recreate)"   # recorded in rollout history for this revision
+    kubernetes.io/change-cause: "Task 5: Recreate release of 1.1.0"   # recorded in rollout history for this revision
 spec:
   replicas: 3                           # lab-mandated
   selector:
@@ -22,11 +22,11 @@ spec:
     metadata:
       labels:
         app: notice-board
-        version: "1.0.0"             # label value is a string; matches the image version
+        version: "1.1.0"             # label value is a string; matches the image version
     spec:
       containers:
         - name: notice-board
-          image: notice-board:02230151-1.0.0
+          image: notice-board:02230151-1.1.0
           imagePullPolicy: Never        # image is loaded into the nodes; kubelet must never contact a registry
           ports:
             - name: http                # named port so Services can use targetPort: http
