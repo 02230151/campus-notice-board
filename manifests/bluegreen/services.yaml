@@ -1,4 +1,4 @@
-# Purpose: production + preview Services. Production points at slot: blue; preview always points at green.
+# Purpose: production + preview Services. Production points at slot: green; preview always points at green.
 # Apply:   kubectl apply -f manifests/bluegreen/services.yaml
 # To switch production, change the 'slot:' value in the first two Services and re-apply.
 apiVersion: v1
@@ -10,7 +10,7 @@ spec:
   type: ClusterIP                       # internal production address used by the monitor
   selector:
     app: notice-board
-    slot: blue                         # THE SWITCH: which colour receives production traffic
+    slot: green                         # THE SWITCH: which colour receives production traffic
   ports:
     - port: 80
       targetPort: http
@@ -24,7 +24,7 @@ spec:
   type: NodePort
   selector:
     app: notice-board
-    slot: blue                         # THE SWITCH: must always match the Service above
+    slot: green                         # THE SWITCH: must always match the Service above
   ports:
     - port: 80
       targetPort: http
