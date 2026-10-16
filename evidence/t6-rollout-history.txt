@@ -1,0 +1,6 @@
+﻿deployment.apps/notice-board 
+REVISION  CHANGE-CAUSE
+3         Task 5: return to 1.0.0 before RollingUpdate test
+5         Task 6: broken release 1.2.0-broken (healthz never 200)
+6         Task 5: RollingUpdate release of 1.1.0
+
