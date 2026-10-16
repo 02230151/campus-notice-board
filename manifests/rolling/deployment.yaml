@@ -1,0 +1,56 @@
+# Purpose: notice-board Deployment (single-Deployment release object, Tasks 3, 5, 6).
+# Apply:   kubectl apply -f manifests/rolling/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notice-board
+  namespace: nb-02230151                # lab rule: <sid> in namespace
+  labels:
+    app: notice-board
+spec:
+  replicas: 3                           # lab-mandated
+  selector:
+    matchLabels:
+      app: notice-board
+  strategy:
+    type: RollingUpdate                 # starting strategy; changed to Recreate in Task 5
+    rollingUpdate:
+      maxUnavailable: 0                 # never remove a serving Pod before a new one is ready
+      maxSurge: 1                       # allow one extra Pod during the rollout
+  minReadySeconds: 5                    # a new Pod must stay ready 5s before it counts as available
+  progressDeadlineSeconds: 60           # rollout with no progress for 60s is marked failed (Task 6)
+  template:
+    metadata:
+      labels:
+        app: notice-board
+        version: "1.0.0"                # label value is a string; matches the image version
+    spec:
+      containers:
+        - name: notice-board
+          image: notice-board:02230151-1.0.0
+          imagePullPolicy: Never        # image is loaded into the nodes; kubelet must never contact a registry
+          ports:
+            - name: http                # named port so Services can use targetPort: http
+              containerPort: 8080
+          securityContext:
+            runAsNonRoot: true          # image runs as UID 10001; Kubernetes enforces it
+            allowPrivilegeEscalation: false
+          resources:
+            requests:
+              cpu: 100m                 # 6 Pods (blue+green) = 600m, leaves room for monitor inside the 1 CPU quota
+              memory: 64Mi              # 6 x 64Mi = 384Mi, well inside 1Gi
+            limits:
+              cpu: 200m                 # 2x request; 6 x 200m = 1200m, inside the 2 CPU limit quota
+              memory: 128Mi             # 6 x 128Mi = 768Mi, inside the 2Gi limit quota
+          readinessProbe:
+            httpGet:
+              path: /healthz            # only ready Pods receive traffic; honours the 5s warm-up
+              port: http
+            periodSeconds: 2
+            failureThreshold: 2
+          livenessProbe:
+            httpGet:
+              path: /version            # deliberately NOT /healthz: a Pod that is merely unhealthy/warming up
+              port: http                # must be taken out of rotation, not killed and restarted in a loop
+            initialDelaySeconds: 10
+            periodSeconds: 10

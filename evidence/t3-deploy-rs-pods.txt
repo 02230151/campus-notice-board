@@ -1,0 +1,10 @@
+﻿NAME                           READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS     IMAGES                        SELECTOR
+deployment.apps/notice-board   3/3     3            3           25s   notice-board   notice-board:02230151-1.0.0   app=notice-board
+
+NAME                                     DESIRED   CURRENT   READY   AGE   CONTAINERS     IMAGES                        SELECTOR
+replicaset.apps/notice-board-b6645d4b6   3         3         3       25s   notice-board   notice-board:02230151-1.0.0   app=notice-board,pod-template-hash=b6645d4b6
+
+NAME                               READY   STATUS    RESTARTS   AGE   IP           NODE                      NOMINATED NODE   READINESS GATES
+pod/notice-board-b6645d4b6-27mnq   1/1     Running   0          25s   10.244.2.3   cte412-02230151-worker    <none>           <none>
+pod/notice-board-b6645d4b6-7hbkj   1/1     Running   0          25s   10.244.2.2   cte412-02230151-worker    <none>           <none>
+pod/notice-board-b6645d4b6-cvqq7   1/1     Running   0          25s   10.244.1.2   cte412-02230151-worker2   <none>           <none>
