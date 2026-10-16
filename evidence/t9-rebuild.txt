@@ -1,0 +1,44 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20261017013518
+Username: TDR\Asus
+RunAs User: TDR\Asus
+Configuration Name: 
+Machine: TDR (Microsoft Windows NT 10.0.26300.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+Process ID: 14152
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcript started, output file is evidence\t9-rebuild.txt
+PS C:\Users\Asus\Desktop\Notes\Semester 7\Integrated Security(CTE412)\systemintegrationpractical\campus-notice-board> kubectl delete -f manifests/bluegreen/
+
+PS C:\Users\Asus\Desktop\Notes\Semester 7\Integrated Security(CTE412)\systemintegrationpractical\campus-notice-board> kubectl delete -f manifests/base/monitor.yaml
+
+PS C:\Users\Asus\Desktop\Notes\Semester 7\Integrated Security(CTE412)\systemintegrationpractical\campus-notice-board> kubectl get all
+
+PS C:\Users\Asus\Desktop\Notes\Semester 7\Integrated Security(CTE412)\systemintegrationpractical\campus-notice-board> kubectl apply -f manifests/base/namespace.yaml
+
+PS C:\Users\Asus\Desktop\Notes\Semester 7\Integrated Security(CTE412)\systemintegrationpractical\campus-notice-board> kubectl apply -f manifests/base/
+
+PS C:\Users\Asus\Desktop\Notes\Semester 7\Integrated Security(CTE412)\systemintegrationpractical\campus-notice-board> kubectl apply -f manifests/bluegreen/
+
+PS C:\Users\Asus\Desktop\Notes\Semester 7\Integrated Security(CTE412)\systemintegrationpractical\campus-notice-board> kubectl rollout status deployment/notice-board-blue
+
+PS C:\Users\Asus\Desktop\Notes\Semester 7\Integrated Security(CTE412)\systemintegrationpractical\campus-notice-board> kubectl rollout status deployment/notice-board-green
+
+PS C:\Users\Asus\Desktop\Notes\Semester 7\Integrated Security(CTE412)\systemintegrationpractical\campus-notice-board> kubectl get all
+
+PS C:\Users\Asus\Desktop\Notes\Semester 7\Integrated Security(CTE412)\systemintegrationpractical\campus-notice-board> kubectl get configmap notice-board-flags
+
+PS C:\Users\Asus\Desktop\Notes\Semester 7\Integrated Security(CTE412)\systemintegrationpractical\campus-notice-board> Stop-Transcript
+**********************
+Windows PowerShell transcript end
+End time: 20261017013609
+**********************
